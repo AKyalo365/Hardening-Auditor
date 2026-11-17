@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-    Windows Hardening Auditor — Module 2 (Windows/Linux Hardening Auditor)
+    Windows Hardening Auditor - Module 2 (Windows/Linux Hardening Auditor)
 
 .DESCRIPTION
     Audits a Windows host against a CIS-style hardening baseline (UAC,
@@ -115,10 +115,10 @@ function Check-Firewall {
         foreach ($p in $profiles) {
             $id = "FW-$($p.Name)"
             if ($p.Enabled) {
-                Add-Check -Id $id -Category "Network" -Title "Windows Firewall enabled — $($p.Name) profile" -Severity "Critical" `
+                Add-Check -Id $id -Category "Network" -Title "Windows Firewall enabled - $($p.Name) profile" -Severity "Critical" `
                     -Status "PASS" -Found "Enabled" -Expected "Enabled" -Remediation "N/A" -CisRef "CIS 9.1/9.2/9.3"
             } else {
-                Add-Check -Id $id -Category "Network" -Title "Windows Firewall enabled — $($p.Name) profile" -Severity "Critical" `
+                Add-Check -Id $id -Category "Network" -Title "Windows Firewall enabled - $($p.Name) profile" -Severity "Critical" `
                     -Status "FAIL" -Found "Disabled" -Expected "Enabled" `
                     -Remediation "Run: Set-NetFirewallProfile -Profile $($p.Name) -Enabled True" -CisRef "CIS 9.1/9.2/9.3"
             }
@@ -218,7 +218,7 @@ function Check-PasswordPolicy {
         } else {
             Add-Check -Id "PW-02" -Category "Password Policy" -Title "Account lockout threshold configured (1-10 attempts)" -Severity "High" `
                 -Status "FAIL" -Found "no lockout threshold set (Never)" -Expected "1-10" `
-                -Remediation "Run: net accounts /lockoutthreshold:5 — an unlimited threshold allows unlimited password guessing." -CisRef "CIS 1.2.2"
+                -Remediation "Run: net accounts /lockoutthreshold:5 - an unlimited threshold allows unlimited password guessing." -CisRef "CIS 1.2.2"
         }
     } catch {
         Add-Check -Id "PW-01" -Category "Password Policy" -Title "Password and lockout policy" -Severity "High" `
@@ -255,7 +255,7 @@ function Check-RDP {
 }
 
 # ---------------------------------------------------------------------------
-# 6. SMBv1 (CIS 18.3.x — legacy protocol, EternalBlue vector)
+# 6. SMBv1 (CIS 18.3.x - legacy protocol, EternalBlue vector)
 # ---------------------------------------------------------------------------
 function Check-SMB1 {
     try {
@@ -650,3 +650,4 @@ Write-Host "  HTML: $htmlOut"
 if (-not $isAdmin) {
     Write-Host "  NOTE: not running elevated - some checks may be limited or marked Info. Re-run 'as Administrator' for full coverage." -ForegroundColor Yellow
 }
+
